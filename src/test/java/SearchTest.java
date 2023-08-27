@@ -28,7 +28,7 @@ public class SearchTest {
         searchBox.sendKeys("pillow");
         WebElement searchButton = driver.findElement(By.className("search-button"));
         searchButton.click();
-        assertThat(driver.getTitle()).isEqualTo("SEARCH RESULTS FOR 'PILLOW'");
+        assertThat(driver.getTitle()).isEqualTo("Search results for: 'pillow'");
     }
 
     @AfterMethod
