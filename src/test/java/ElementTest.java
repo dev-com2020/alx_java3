@@ -73,6 +73,24 @@ public class ElementTest {
         searchBox.sendKeys("Bags");
         searchBox.submit();
         assertThat(driver.getTitle()).isEqualTo("Search results for: 'Bags'");
+
+    }
+    @Test
+    public void byXpathLocatorSearchResult(){
+        WebElement searchBox = driver.findElement(By.xpath("//*[@id='search']"));
+        searchBox.sendKeys("Bags");
+        searchBox.submit();
+        WebElement pageTitle = driver.findElement(By.className("page-title"));
+        assertThat(pageTitle.getText()).isEqualTo("SEARCH RESULTS FOR 'BAGS'");
+    }
+
+    @Test
+    public void byCssSelectorLocator(){
+
+        WebElement aboutUs = driver.findElement(By.cssSelector("a[href*='about-magento-demo-store/']"));
+        aboutUs.click();
+
+        assertThat(driver.getTitle()).isEqualTo("About Us");
     }
 
     @AfterClass
