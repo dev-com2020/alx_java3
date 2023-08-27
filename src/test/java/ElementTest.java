@@ -2,7 +2,6 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.annotations.*;
 
 import java.util.List;
@@ -68,6 +67,13 @@ public class ElementTest {
                 .forEach(elem -> System.out.println(elem.getText()));
     }
 
+    @Test
+    public void byXpathLocator(){
+        WebElement searchBox = driver.findElement(By.xpath("//*[@id='search']"));
+        searchBox.sendKeys("Bags");
+        searchBox.submit();
+        assertThat(driver.getTitle()).isEqualTo("Search results for: 'Bags'");
+    }
 
     @AfterClass
     public void tearDown(){
