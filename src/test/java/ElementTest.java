@@ -5,6 +5,8 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.annotations.*;
 
+import java.util.List;
+
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 public class ElementTest {
@@ -54,6 +56,16 @@ public class ElementTest {
         WebElement searchBox = driver.findElement(By.name("q"));
         System.out.println("Lokalizacja elementu: "+ searchBox.getLocation());
         System.out.println("Rozmiar boxu " + searchBox.getSize());
+    }
+
+    @Test
+    public void byTagNameLocatorElement(){
+        List<WebElement> links = driver.findElements(By.tagName("a"));
+        System.out.println("Znalezione linki: " + links.size());
+        links.stream()
+//                .filter(elem -> elem.getText().length() > 0)
+                .filter(elem -> !elem.getText().isEmpty())
+                .forEach(elem -> System.out.println(elem.getText()));
     }
 
 
