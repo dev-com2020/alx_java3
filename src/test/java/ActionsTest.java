@@ -48,4 +48,24 @@ public class ActionsTest {
     FileUtils.copyFile(screenShot, new File("./target/ekran8.png"));
     }
 
+    @Test
+    public void shouldMoveByOffset(){
+        WebElement three = driver.findElement(By.name("three"));
+        System.out.println(" X:" + three.getLocation().getX() + " Y:" + three.getLocation().getY());
+        Actions actions = new Actions(driver);
+        actions.moveByOffset(three.getLocation().getX() + 1, three.getLocation().getY() + 1).click();
+        actions.perform();
+    }
+
+    @Test
+    public void shouldMoveByOffsetAndClickMultiple(){
+        WebElement three = driver.findElement(By.name("three"));
+        int tileWidth = 100;
+        int tileHeight = 80;
+        Actions actions = new Actions(driver);
+        actions.moveByOffset(3 * tileWidth,3 * tileHeight).click();
+        actions.perform();
+
+    }
+
 }
