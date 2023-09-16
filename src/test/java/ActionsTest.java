@@ -16,7 +16,7 @@ public class ActionsTest {
 
     @BeforeMethod
     public void beforeMethod() {
-//        ścieżka do drivera
+//        ścieżka do driveraccc
         System.setProperty("webdriver.chrome.driver","src/test/resources/drivers/chromedriver.exe");
 //        inicjalizacja sesji
         driver = new ChromeDriver();
