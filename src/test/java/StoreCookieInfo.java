@@ -38,8 +38,8 @@ public class StoreCookieInfo {
             FileWriter fos = new FileWriter(dataFile);
             BufferedWriter bos = new BufferedWriter(fos);
             for (Cookie ck: driver.manage().getCookies()){
-                bos.write((ck.getName()) + ";" + ck.getValue() + ";" + ck.getDomain() + ";"
-                + ck.getPath() + ";" + ck.getExpiry() + ";" + ck.isSecure());
+                bos.write((ck.getName() + ";" + ck.getValue() + ";" + ck.getDomain() + ";"
+                + ck.getPath() + ";" + ck.getExpiry() + ";" + ck.isSecure()));
                 bos.newLine();
             }
             bos.flush();
