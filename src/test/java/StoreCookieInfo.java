@@ -21,17 +21,17 @@ public class StoreCookieInfo {
         System.setProperty("webdriver.chrome.driver","src/test/resources/drivers/chromedriver.exe");
 //        inicjalizacja sesji
         driver = new ChromeDriver();
-        driver.get("http://demo-store.seleniumacademy.com/customer/account/login/");
+        driver.get("https://www.bing.com/maps?cp=52.40237%7E16.942753&lvl=17.2");
 
     }
 
     @Test
     public void storeCookies(){
-        driver.findElement(By.id("email")).sendKeys("user@seleniumacademy.com");
-        driver.findElement(By.id("pass")).sendKeys("tester");
-        driver.findElement(By.id("send2")).submit();
+//        driver.findElement(By.id("email")).sendKeys("user@seleniumacademy.com");
+//        driver.findElement(By.id("pass")).sendKeys("tester");
+//        driver.findElement(By.id("send2")).submit();
 
-        File dataFile = new File("./target/browser.data");
+        File dataFile = new File("./target/browser2.data");
         try {
             dataFile.delete();
             dataFile.createNewFile();

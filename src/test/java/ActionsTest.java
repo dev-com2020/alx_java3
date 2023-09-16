@@ -8,6 +8,7 @@ import org.testng.annotations.Test;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.concurrent.TimeUnit;
 
 
 public class ActionsTest {
@@ -20,7 +21,7 @@ public class ActionsTest {
         System.setProperty("webdriver.chrome.driver","src/test/resources/drivers/chromedriver.exe");
 //        inicjalizacja sesji
         driver = new ChromeDriver();
-        driver.get("http://guidebook.seleniumacademy.com/Selectable.html");
+//        driver.get("http://guidebook.seleniumacademy.com/Selectable.html");
 
     }
 
@@ -64,6 +65,20 @@ public class ActionsTest {
         int tileHeight = 80;
         Actions actions = new Actions(driver);
         actions.moveByOffset(3 * tileWidth,3 * tileHeight).click();
+        actions.perform();
+
+    }
+
+    @Test
+    public void shouldMoveByOffsetAndClickBingMap(){
+        int tileWidth = 100;
+        int tileHeight = 100;
+        driver.get("https://www.bing.com/maps?cp=52.40237%7E16.942753&lvl=17.2");
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        WebElement but = driver.findElement(By.id("bnp_btn_accept"));
+        but.click();
+        Actions actions = new Actions(driver);
+        actions.moveByOffset(10 * tileWidth,4 * tileHeight).contextClick();
         actions.perform();
 
     }
