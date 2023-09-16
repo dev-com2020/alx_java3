@@ -1,6 +1,8 @@
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -8,6 +10,7 @@ import org.testng.annotations.Test;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.concurrent.TimeUnit;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -27,8 +30,11 @@ public class Navi {
     @Test
     public void searchProduct() throws IOException {
         driver.navigate().to("http://demo-store.seleniumacademy.com/");
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 
-        WebElement searchBox = driver.findElement(By.name("q"));
+//        WebElement searchBox = driver.findElement(By.name("q"));
+        WebElement searchBox = (new WebDriverWait(driver,20)).until(
+                (ExpectedCondition<WebElement>) x -> x.findElement(By.name("q")));
         searchBox.sendKeys("GLASS VASE");
         WebElement searchButton = driver.findElement(By.className("search-button"));
         searchButton.click();

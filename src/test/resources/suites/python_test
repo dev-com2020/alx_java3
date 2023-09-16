@@ -1,0 +1,34 @@
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+from selenium.webdriver.common.keys import Keys
+import shutil
+
+# Zakładam, że używasz webdrivera dla Chrome. Jeśli inny, dostosuj poniżej.
+driver = webdriver.Chrome()
+
+driver.get("http://demo-store.seleniumacademy.com/")
+
+# Wprowadzenie tekstu "GLASS VASE" do pola wyszukiwania
+search_box = driver.find_element(By.NAME, "q")
+search_box.send_keys("GLASS VASE")
+
+# Kliknięcie przycisku wyszukiwania
+search_button = driver.find_element(By.CLASS_NAME, "search-button")
+search_button.click()
+
+# Zakładam użycie 'assert' do sprawdzenia tytułu, ale możesz też użyć jakiegoś frameworka do testowania
+assert driver.title == "Search results for: 'GLASS VASE'"
+
+# Nawigacja wstecz i zrzut ekranu
+driver.back()
+screenshot = driver.get_screenshot_as_file("./target/ekran5.png")
+
+# Nawigacja do przodu i zrzut ekranu
+driver.forward()
+screenshot1 = driver.get_screenshot_as_file("./target/ekran6.png")
+
+# Odświeżenie strony
+driver.refresh()
+
+# Nie zapomnij zamknąć przeglądarki na końcu
+driver.quit()
