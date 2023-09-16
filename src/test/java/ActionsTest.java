@@ -71,15 +71,16 @@ public class ActionsTest {
 
     @Test
     public void shouldMoveByOffsetAndClickBingMap(){
-        int tileWidth = 100;
-        int tileHeight = 100;
+        int tileWidth = 120;
+        int tileHeight = 120;
         driver.get("https://www.bing.com/maps?cp=52.40237%7E16.942753&lvl=17.2");
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         WebElement but = driver.findElement(By.id("bnp_btn_accept"));
         but.click();
         Actions actions = new Actions(driver);
-        actions.moveByOffset(10 * tileWidth,4 * tileHeight).contextClick();
-        actions.perform();
+        actions.moveByOffset(tileWidth * 10,tileHeight * 4)
+                .contextClick().perform();
+//                .click(driver.findElement(By.className("opencard"))).perform();
 
     }
 
