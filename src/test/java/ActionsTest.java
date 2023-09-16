@@ -37,10 +37,12 @@ public class ActionsTest {
                 .click(three)
                 .click(five)
                 .keyUp(Keys.CONTROL);
+//                .click(one);
 
 
-    Action compositeAction = actions.build();
-    compositeAction.perform();
+//    Action compositeAction = actions.build();
+//    compositeAction.perform();
+        actions.perform();
 
     File screenShot = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
     FileUtils.copyFile(screenShot, new File("./target/ekran8.png"));
