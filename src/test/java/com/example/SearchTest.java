@@ -1,3 +1,5 @@
+package com.example;
+
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -5,12 +7,12 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 import java.io.File;
 import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URL;
+import java.util.List;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
@@ -52,13 +54,16 @@ public class SearchTest {
         assertThat(driver.getTitle()).isEqualTo("Search results for: 'pillow'");
     }
 
+    @Parameters({"searchWord","items"})
     @Test
-    public void searchProductByFakeData() throws IOException {
+    public void searchProductByFakeData(String searchWord, int items ) {
         WebElement searchBox = driver.findElement(By.name("q"));
-        searchBox.sendKeys("pillow");
+        searchBox.sendKeys(searchWord);
         WebElement searchButton = driver.findElement(By.className("search-button"));
         searchButton.click();
-        assertThat(driver.getTitle()).isEqualTo("Search results for: 'pillow'");
+        assertThat(driver.getTitle()).isEqualTo("Search results for: '" + searchWord + "'");
+        List<WebElement> searchItems = driver.findElements(By.xpath("/html/body/div[1]/div[2]/div[2]/div/div[2]/div[2]/div[3]/div[1]/div[2]/div/p/strong"));
+        assertThat(searchItems.size()).isEqualTo(items);
     }
 
     @AfterMethod
@@ -66,3 +71,4 @@ public class SearchTest {
         driver.quit();
     }
 }
+
