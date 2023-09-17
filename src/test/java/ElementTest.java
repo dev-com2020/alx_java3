@@ -1,11 +1,16 @@
 
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.Platform;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import org.testng.annotations.*;
 
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.List;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
@@ -14,13 +19,15 @@ public class ElementTest {
     WebDriver driver;
 
     @BeforeClass
-    public void setup(){
-//        ścieżka do drivera
-        System.setProperty("webdriver.chrome.driver","src/test/resources/drivers/chromedriver.exe");
-//        inicjalizacja sesji
-//        ChromeOptions chromeOptions = new ChromeOptions();
-//        driver = new ChromeDriver(chromeOptions);
-        driver = new ChromeDriver();
+    @BeforeMethod
+    public void setup() throws MalformedURLException {
+
+        DesiredCapabilities caps = new DesiredCapabilities();
+
+        caps.setBrowserName("chrome");
+        caps.setPlatform(Platform.WINDOWS);
+
+        driver = new RemoteWebDriver(new URL("http://192.168.56.1:4444/"), caps);
     }
 
     @BeforeMethod

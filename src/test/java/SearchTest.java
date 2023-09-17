@@ -19,29 +19,27 @@ public class SearchTest {
 
     WebDriver driver;
 
-//    @BeforeMethod
-//    public void beforeMethod() throws IOException {
-////        ścieżka do drivera
-//        System.setProperty("webdriver.chrome.driver","src/test/resources/drivers/chromedriver.exe");
-////        inicjalizacja sesji
-//        driver = new ChromeDriver();
-//        driver.get("http://demo-store.seleniumacademy.com/");
-////        File screenShot = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
-////        FileUtils.copyFile(screenShot, new File("./target/ekran1.png"));
-//    }
-
     @BeforeMethod
-    public void setup() throws MalformedURLException {
-
-        DesiredCapabilities caps = new DesiredCapabilities();
-
-        caps.setBrowserName("chrome");
-        caps.setPlatform(Platform.WINDOWS);
-
-        driver = new RemoteWebDriver(new URL("http://192.168.56.1:4444/"), caps);
+    public void beforeMethod() throws IOException {
+//        ścieżka do drivera
+        System.setProperty("webdriver.chrome.driver","src/test/resources/drivers/chromedriver.exe");
+//        inicjalizacja sesji
+        driver = new ChromeDriver();
         driver.get("http://demo-store.seleniumacademy.com/");
-
     }
+
+//    @BeforeMethod
+//    public void setup() throws MalformedURLException {
+//
+//        DesiredCapabilities caps = new DesiredCapabilities();
+//
+//        caps.setBrowserName("firefox");
+//        caps.setPlatform(Platform.WINDOWS);
+//
+//        driver = new RemoteWebDriver(new URL("http://192.168.56.1:4444/"), caps);
+//        driver.get("http://demo-store.seleniumacademy.com/");
+//
+//    }
 
     @Test
     public void searchProduct() throws IOException {
@@ -50,7 +48,7 @@ public class SearchTest {
         WebElement searchButton = driver.findElement(By.className("search-button"));
         searchButton.click();
         File screenShot = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
-        FileUtils.copyFile(screenShot, new File("./target/ekran2.png"));
+        FileUtils.copyFile(screenShot, new File("./target/ekran222.png"));
         assertThat(driver.getTitle()).isEqualTo("Search results for: 'pillow'");
     }
 
