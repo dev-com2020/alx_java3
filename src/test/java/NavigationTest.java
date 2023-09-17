@@ -29,7 +29,7 @@ public class NavigationTest {
         Assert.assertEquals(driver.getTitle(),"Madison Island");
     }
 
-    @Attachment(value = "Screenshot", type = "image/png")
+    @Attachment(value = "Screenshot1", type = "image/png")
     public byte[] captureScreenshot(){
         return ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
     }
