@@ -1,5 +1,6 @@
 package com.example;
 
+import com.opencsv.CSVReader;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -8,7 +9,10 @@ import org.openqa.selenium.remote.RemoteWebDriver;
 import org.testng.annotations.*;
 
 import java.io.File;
+import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
@@ -19,14 +23,27 @@ public class SearchTest {
     WebDriver driver;
 
 
+//    @DataProvider(name = "searchWords")
+//    public Object[][] provider(){
+//        return new Object[][]{
+//                {"phones", 0},
+//                {"music", 5},
+//                {"pillow", 2},
+//                {"iphone", 0}
+//        };
+//    }
+
     @DataProvider(name = "searchWords")
-    public Object[][] provider(){
-        return new Object[][]{
-                {"phones", 0},
-                {"music", 5},
-                {"pillow", 2},
-                {"iphone", 0}
-        };
+    public Iterator<Object[]> provider() throws Exception {
+        CSVReader reader = new CSVReader(
+                new FileReader("./src/test/resources/data/data.csv"),',','\'',1);
+        List<Object[]> myEntries = new ArrayList<Object[]>();
+        String[] nextLine;
+        while ((nextLine = reader.readNext()) !=null){
+            myEntries.add(nextLine);
+        }
+        reader.close();
+        return myEntries.iterator();
     }
 
     @BeforeMethod
@@ -64,14 +81,14 @@ public class SearchTest {
 
 //    @Parameters({"searchWord","items"})
     @Test(dataProvider = "searchWords")
-    public void searchProductByFakeData(String searchWord,int items ) {
+    public void searchProductByFakeData(String searchWord,String items) {
         WebElement searchBox = driver.findElement(By.name("q"));
         searchBox.sendKeys(searchWord);
         WebElement searchButton = driver.findElement(By.className("search-button"));
         searchButton.click();
         assertThat(driver.getTitle()).isEqualTo("Search results for: '" + searchWord + "'");
         List<WebElement> searchItems = driver.findElements(By.xpath("//h2[@class='product-name']/a"));
-        assertThat(searchItems.size()).isEqualTo(items);
+        assertThat(searchItems.size()).isEqualTo(Integer.parseInt(items));
     }
 
     @AfterMethod
