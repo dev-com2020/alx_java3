@@ -5,10 +5,7 @@ import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Parameters;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 
 import java.io.File;
 import java.io.IOException;
@@ -54,9 +51,9 @@ public class SearchTest {
         assertThat(driver.getTitle()).isEqualTo("Search results for: 'pillow'");
     }
 
-    @Parameters({"searchWord","items"})
+    @Parameters(value = {"searchWord","items"})
     @Test
-    public void searchProductByFakeData(String searchWord, int items ) {
+    public void searchProductByFakeData(@Optional("pillow") String searchWord, @Optional("2") int items ) {
         WebElement searchBox = driver.findElement(By.name("q"));
         searchBox.sendKeys(searchWord);
         WebElement searchButton = driver.findElement(By.className("search-button"));
