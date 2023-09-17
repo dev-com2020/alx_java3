@@ -18,6 +18,17 @@ public class SearchTest {
 
     WebDriver driver;
 
+
+    @DataProvider(name = "searchWords")
+    public Object[][] provider(){
+        return new Object[][]{
+                {"phones", 0},
+                {"music", 5},
+                {"pillow", 2},
+                {"iphone", 0}
+        };
+    }
+
     @BeforeMethod
     public void beforeMethod() throws IOException {
 //        ścieżka do drivera
@@ -51,15 +62,15 @@ public class SearchTest {
         assertThat(driver.getTitle()).isEqualTo("Search results for: 'pillow'");
     }
 
-    @Parameters(value = {"searchWord","items"})
-    @Test
-    public void searchProductByFakeData(@Optional("pillow") String searchWord, @Optional("2") int items ) {
+//    @Parameters({"searchWord","items"})
+    @Test(dataProvider = "searchWords")
+    public void searchProductByFakeData(String searchWord,int items ) {
         WebElement searchBox = driver.findElement(By.name("q"));
         searchBox.sendKeys(searchWord);
         WebElement searchButton = driver.findElement(By.className("search-button"));
         searchButton.click();
         assertThat(driver.getTitle()).isEqualTo("Search results for: '" + searchWord + "'");
-        List<WebElement> searchItems = driver.findElements(By.xpath("/html/body/div[1]/div[2]/div[2]/div/div[2]/div[2]/div[3]/div[1]/div[2]/div/p/strong"));
+        List<WebElement> searchItems = driver.findElements(By.xpath("//h2[@class='product-name']/a"));
         assertThat(searchItems.size()).isEqualTo(items);
     }
 
