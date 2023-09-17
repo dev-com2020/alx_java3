@@ -10,7 +10,6 @@ import java.util.List;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
-
 public class ElementTest {
     WebDriver driver;
 
@@ -29,7 +28,7 @@ public class ElementTest {
         driver.get("http://demo-store.seleniumacademy.com/");
     }
 
-    @Test
+    @Test(groups = {"szybki"})
     public void elementGetAttrExamples(){
         WebElement searchBox = driver.findElement(By.name("q"));
         System.out.println("Nazwa searchBoxa to: " + searchBox.getAttribute("name"));
