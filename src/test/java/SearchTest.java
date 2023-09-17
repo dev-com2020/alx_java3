@@ -52,6 +52,15 @@ public class SearchTest {
         assertThat(driver.getTitle()).isEqualTo("Search results for: 'pillow'");
     }
 
+    @Test
+    public void searchProductByFakeData() throws IOException {
+        WebElement searchBox = driver.findElement(By.name("q"));
+        searchBox.sendKeys("pillow");
+        WebElement searchButton = driver.findElement(By.className("search-button"));
+        searchButton.click();
+        assertThat(driver.getTitle()).isEqualTo("Search results for: 'pillow'");
+    }
+
     @AfterMethod
     public void afterMethod(){
         driver.quit();

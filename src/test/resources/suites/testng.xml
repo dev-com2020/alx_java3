@@ -1,0 +1,11 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="Suite" parallel="tests" thread-count="2">
+      <test name="Search Test">
+            <parameter name="searchWord" value="pillow"/>
+            <parameter name="searchWord2" value="blanket"/>
+            <parameter name="searchWord3" value="bed"/>
+        <classes>
+            <class name="SearchTest" />
+        </classes>
+    </test>
+</suite>
